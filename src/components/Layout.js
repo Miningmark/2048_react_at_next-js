@@ -30,8 +30,9 @@ export default function Layout({ children }) {
       </Head>
       <StyledHeader>
         <h1>test</h1>
-        <Link href={""}>Home</Link>
-        <Link href={""}>Highscore</Link>
+        <Link href="/">Home</Link>
+        <Link href="/">Highscore</Link>
+        <Link href="/newGame">New Game</Link>
       </StyledHeader>
       <StyledMain>{children}</StyledMain>
     </>
