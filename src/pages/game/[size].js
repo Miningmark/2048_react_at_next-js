@@ -170,9 +170,11 @@ export default function GameBoard() {
         Board Size {size}x{size}
       </p>
       <PlayGround $size={size}>
-        {grid.map((value, index) => (
-          <Square key={index}>{value}</Square>
-        ))}
+        {grid.map((row, rowIndex) =>
+          row.map((value, colIndex) => (
+            <Square key={`${rowIndex}-${colIndex}`}>{value !== 0 ? value : ""}</Square>
+          ))
+        )}
       </PlayGround>
       <div>
         <button onClick={moveLeft}>Left</button>
