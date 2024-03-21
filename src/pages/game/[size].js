@@ -24,6 +24,7 @@ const Square = styled.div`
 export default function GameBoard() {
   const [grid, setGrid] = useState([]);
   //TODO: Grid save at Local Storage
+
   const router = useRouter();
   const size = router.query.size;
 
