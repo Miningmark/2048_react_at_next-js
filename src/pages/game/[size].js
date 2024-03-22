@@ -2,6 +2,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import ConfirmationPopup from "@/components/PopUp.js";
+import NamePopup from "@/components/PopUpInput.js";
 
 import arrowLeft from "@/assets/icons/left_black.png";
 import arrowRight from "@/assets/icons/right_black.png";
@@ -89,6 +91,22 @@ export default function GameBoard() {
   const router = useRouter();
   const [size, setSize] = useState(3);
   const [grid, setGrid] = useState([]);
+  const [points, setPoints] = useState(0);
+  const [save, setSave] = useState(false);
+
+  function handleOnCancel() {
+    router.push("/game");
+  }
+
+  function handleOnConfirm() {
+    setSave(true);
+  }
+
+  function handleToSave(name) {
+    console.log("Name: ", name);
+    //TODO:  Save game to database with the provided name
+    router.push("/game");
+  }
 
   useEffect(() => {
     const gridSize = parseInt(router.query.size) || 3;
@@ -214,7 +232,7 @@ export default function GameBoard() {
     // Überprüfen, ob es leere Zellen gibt
     if (emptyCells.length === 0) {
       console.log("Game Over");
-      //TODO: Game over screen anzeigen
+      gameOver();
       return;
     }
 
@@ -226,6 +244,17 @@ export default function GameBoard() {
     const newGrid = [...grid]; // Kopie des aktuellen Gitters
     newGrid[newX][newY] = 2; // Setzen der neuen Zahl
     setGrid(newGrid); // Aktualisieren des Zustands des Gitters
+  }
+
+  function gameOver() {
+    let sum = 0;
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[i].length; j++) {
+        sum += grid[i][j];
+      }
+    }
+    console.log("Points: ", sum);
+    setPoints(sum);
   }
 
   return (
@@ -256,6 +285,16 @@ export default function GameBoard() {
           <Image src={arrowDown} width={50} height={50} alt="Button Down"></Image>
         </GameButton>
       </ButtonWrap>
+      {points > 0 && (
+        <ConfirmationPopup
+          message={`Your Score is ${points}!`}
+          onCancel={handleOnCancel}
+          onConfirm={handleOnConfirm}
+          cancelText={"New Game"}
+          confirmText={"Save Highscore"}
+        />
+      )}
+      {save && <NamePopup onCancel={handleOnCancel} onConfirm={handleToSave} />}
     </GameDiv>
   );
 }
