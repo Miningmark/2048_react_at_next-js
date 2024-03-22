@@ -9,6 +9,11 @@ const StyledLink = styled(Link)`
   border-radius: 10px;
   transform: scale(1);
   transition: 0.5s;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     transform: scale(1.1);
@@ -24,9 +29,16 @@ const StyledDiv = styled.div`
   gap: 20px;
 `;
 
+const NewGameDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
+
 export default function NewGame() {
   return (
-    <div>
+    <NewGameDiv>
       <h2>New Game</h2>
       <p>Select Board Size</p>
       <StyledDiv>
@@ -35,6 +47,6 @@ export default function NewGame() {
         <StyledLink href="/game/5">5x5</StyledLink>
         <StyledLink href="/game/6">6x6</StyledLink>
       </StyledDiv>
-    </div>
+    </NewGameDiv>
   );
 }

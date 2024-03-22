@@ -22,6 +22,22 @@ const StyledMain = styled.main`
   height: calc(100vh - 60px);
 `;
 
+const TitleName = styled.h1`
+  color: rgb(194, 140, 90);
+`;
+
+const MenuItem = styled(Link)`
+  color: white;
+  text-decoration: none;
+  transform: scale(1);
+  transition: 0.5s;
+
+  &:hover {
+    transform: scale(1.2);
+    transition: 0.5s;
+  }
+`;
+
 export default function Layout({ children }) {
   return (
     <>
@@ -29,10 +45,10 @@ export default function Layout({ children }) {
         <title>2048 React </title>
       </Head>
       <StyledHeader>
-        <h1>test</h1>
-        <Link href="/">Home</Link>
-        <Link href="/">Highscore</Link>
-        <Link href="/newGame">New Game</Link>
+        <TitleName>2048</TitleName>
+        <MenuItem href="/">Home</MenuItem>
+        <MenuItem href="/">Highscore</MenuItem>
+        <MenuItem href="/game">New Game</MenuItem>
       </StyledHeader>
       <StyledMain>{children}</StyledMain>
     </>

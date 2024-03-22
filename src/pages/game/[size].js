@@ -1,6 +1,12 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import Image from "next/image";
+
+import arrowLeft from "@/assets/icons/left_black.png";
+import arrowRight from "@/assets/icons/right_black.png";
+import arrowUp from "@/assets/icons/up_black.png";
+import arrowDown from "@/assets/icons/down_black.png";
 
 const PlayGround = styled.div`
   display: grid;
@@ -51,6 +57,32 @@ const Square = styled.div`
         return `background: rgb(102, 100, 100);`;
     }
   }}
+`;
+
+const GameDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
+
+const ButtonWrap = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 5px;
+  margin-top: 10px;
+`;
+
+const GameButton = styled.button`
+  grid-column: ${(props) => props.col};
+  grid-row: ${(props) => props.row};
+  height: 60px;
+  width: 60px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default function GameBoard() {
@@ -197,7 +229,7 @@ export default function GameBoard() {
   }
 
   return (
-    <div>
+    <GameDiv>
       <p>
         Board Size {size}x{size}
       </p>
@@ -210,12 +242,20 @@ export default function GameBoard() {
           ))
         )}
       </PlayGround>
-      <div>
-        <button onClick={moveLeft}>Left</button>
-        <button onClick={moveRight}>Right</button>
-        <button onClick={moveUp}>Up</button>
-        <button onClick={moveDown}>Down</button>
-      </div>
-    </div>
+      <ButtonWrap>
+        <GameButton ol="1" row="2" onClick={moveLeft}>
+          <Image src={arrowLeft} width={50} height={50} alt="Button Left"></Image>
+        </GameButton>
+        <GameButton col="3" row="2" onClick={moveRight}>
+          <Image src={arrowRight} width={50} height={50} alt="Button Right"></Image>
+        </GameButton>
+        <GameButton col="2" row="1" onClick={moveUp}>
+          <Image src={arrowUp} width={50} height={50} alt="Button Up"></Image>
+        </GameButton>
+        <GameButton col="2" row="3" onClick={moveDown}>
+          <Image src={arrowDown} width={50} height={50} alt="Button Down"></Image>
+        </GameButton>
+      </ButtonWrap>
+    </GameDiv>
   );
 }
