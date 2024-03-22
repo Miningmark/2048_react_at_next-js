@@ -12,4 +12,8 @@ export default createGlobalStyle`
     font-family: system-ui;
     color: white;
   }
+
+  .2{
+    background-color: white;
+  }
 `;

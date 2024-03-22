@@ -12,13 +12,45 @@ const PlayGround = styled.div`
 `;
 
 const Square = styled.div`
+  color: black;
   height: 50px;
   width: 50px;
-  background-color: darkblue;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+  ${(props) => {
+    switch (props.$squareColor) {
+      case "zahl2":
+        return `background: rgb(238, 232, 232);`;
+      case "zahl4":
+        return `background: rgb(223, 213, 192);`;
+      case "zahl8":
+        return `background: rgb(218, 177, 125);`;
+      case "zahl16":
+        return `background: rgb(196, 155, 80);`;
+      case "zahl32":
+        return `background: rgb(194, 140, 90);`;
+      case "zahl64":
+        return `background: rgb(190, 175, 87);`;
+      case "zahl128":
+        return `background: rgb(185, 165, 49);`;
+      case "zahl256":
+        return `background: rgb(159, 197, 98);`;
+      case "zahl512":
+        return `background: rgb(134, 189, 61);`;
+      case "zahl1024":
+        return `background: rgb(90, 177, 162);`;
+      case "zahl2048":
+        return `background: rgb(54, 165, 173);`;
+      case "zahl4096":
+        return `background: rgb(114, 107, 184);`;
+      case "zahl8192":
+        return `background: rgb(50, 33, 128);`;
+      default:
+        return `background: rgb(102, 100, 100);`;
+    }
+  }}
 `;
 
 export default function GameBoard() {
@@ -172,7 +204,9 @@ export default function GameBoard() {
       <PlayGround $size={size}>
         {grid.map((row, rowIndex) =>
           row.map((value, colIndex) => (
-            <Square key={`${rowIndex}-${colIndex}`}>{value !== 0 ? value : ""}</Square>
+            <Square key={`${rowIndex}-${colIndex}`} $squareColor={`zahl${value}`}>
+              {value !== 0 ? value : ""}
+            </Square>
           ))
         )}
       </PlayGround>
