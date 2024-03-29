@@ -104,7 +104,7 @@ export default function GameBoard() {
 
   function handleToSave(name) {
     console.log("Name: ", name);
-    //TODO:  Save game to database with the provided name
+    //TODO:  Save game to database with the provided  name
     router.push("/game");
   }
 
